@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "tbUsuarios")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class UsuarioEntity {
     private Integer idUsuario;
 
     private String nome;
-    private String email;
+    private String login;
     private String senha;
 
 

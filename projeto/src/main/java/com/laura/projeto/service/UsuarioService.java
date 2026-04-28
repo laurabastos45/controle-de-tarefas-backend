@@ -16,7 +16,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
     public UsuarioEntity login(String email, String senha) {
-        UsuarioEntity usuario = usuarioRepository.findByEmail(email)
+        UsuarioEntity usuario = usuarioRepository.findByLogin(email)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado") );
 
         if (!usuario.getSenha().equals(senha)) {
