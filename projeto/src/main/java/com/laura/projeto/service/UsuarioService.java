@@ -1,6 +1,7 @@
 package com.laura.projeto.service;
 
 
+import com.laura.projeto.dto.UsuarioDTO;
 import com.laura.projeto.model.UsuarioEntity;
 import com.laura.projeto.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +13,18 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public UsuarioEntity cadastrar(UsuarioEntity usuario) {
+    public UsuarioEntity cadastrar(UsuarioDTO dto) {
+        UsuarioEntity usuario = new UsuarioEntity();
+
+        usuario.setNome(dto.getNome());
+        usuario.setLogin(dto.getEmail()); // 🔥 conversão correta
+        usuario.setSenha(dto.getSenha());
+
         return usuarioRepository.save(usuario);
+
     }
     public UsuarioEntity login(String email, String senha) {
+
         UsuarioEntity usuario = usuarioRepository.findByLogin(email)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado") );
 
