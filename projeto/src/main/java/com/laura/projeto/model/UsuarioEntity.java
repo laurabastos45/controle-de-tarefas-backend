@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "tbUsuarios")
@@ -23,7 +24,10 @@ public class UsuarioEntity {
     @Column(name = "login", nullable = false)
     private String login;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
+
+
 
 
 }

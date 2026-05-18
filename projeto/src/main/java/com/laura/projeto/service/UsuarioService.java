@@ -7,6 +7,8 @@ import com.laura.projeto.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
@@ -17,7 +19,7 @@ public class UsuarioService {
         UsuarioEntity usuario = new UsuarioEntity();
 
         usuario.setNome(dto.getNome());
-        usuario.setLogin(dto.getEmail()); // 🔥 conversão correta
+        usuario.setLogin(dto.getEmail());
         usuario.setSenha(dto.getSenha());
 
         return usuarioRepository.save(usuario);
@@ -34,6 +36,23 @@ public class UsuarioService {
 
         return usuario;
 
+    }
+    public List<UsuarioEntity> listar() {
+        return usuarioRepository.findAll();
+    }
+    public UsuarioEntity atualizar( Long id, UsuarioEntity usuarioAtualizado) {
+        UsuarioEntity usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+
+        usuario.setNome(usuarioAtualizado.getNome());
+        usuario.setLogin(usuarioAtualizado.getLogin());
+        usuario.setSenha(usuarioAtualizado.getSenha());
+
+        return usuarioRepository.save(usuario);
+
+    }
+    public void deletar(Long id) {
+        usuarioRepository.deleteById(id);
     }
 
 }
